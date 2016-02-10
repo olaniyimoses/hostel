@@ -43,7 +43,6 @@ class CartController extends Controller
         ];
 
         $this->cart->insert($item);
-//        $this->cart->destroy();
 
         return redirect('cart/cartitems');
 //        return $cart;
