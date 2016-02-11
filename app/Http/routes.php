@@ -49,7 +49,7 @@ Route::group(['middleware' => 'web'], function () {
     });
 
     Route::group(['prefix' => 'cart'], function(){
-        Route::get('cartitems', 'CartController@addToCart@showCart');
+        Route::get('cartitems', 'CartController@showCart');
         Route::post('cartitems', 'CartController@addToCart');
     });
 });

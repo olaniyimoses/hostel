@@ -269,8 +269,10 @@
                                                     <tr>
                                                         <td class="actions" colspan="6">
                                                             <div class="actions-continue">
-                                                                <input type="submit" value="View All" class="btn btn-default">
-                                                                <input type="submit" value="Proceed to Checkout →" name="proceed" class="btn pull-right btn-primary">
+                                                                <a href="{!! url('cart/cartitems') !!}" class='btn btn-default pull-left'>View All</a>
+                                                                <a href="{!! url('cart/cartitems') !!}" class='btn btn-primary pull-right'>Proceed to Checkout →</a>
+                                                                {{--<input type="submit" value="View All" class="btn btn-default">
+                                                                <input type="submit" value="Proceed to Checkout →" name="proceed" class="btn pull-right btn-primary">--}}
                                                             </div>
                                                         </td>
                                                     </tr>

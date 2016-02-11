@@ -52,10 +52,7 @@
                                 <div>
                                     <p class="bold">{!! $item->type==1 ? 'Single-Room' : 'Self-Contained' !!} {!! $item->sex !!} Hostel</p>
                                 </div>
-                                {{--<p class="price">
-                                    <span class="amount">65K</span>
-                                </p>--}}
-                                <form method="post" class="cart" action="{{ url('cart/cartitems') }}">
+                                <form method="post" class="cart" action="{{ url('/cart/cartitems') }}">
                                     {!! csrf_field() !!}
                                     <input type="hidden" name="hostel_id" value="{{ $item->hostel_id }}"/>
                                     @foreach($types as $type)
