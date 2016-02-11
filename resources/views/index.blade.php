@@ -110,7 +110,7 @@
 									<a href="{!! url('/hostel', $hostel->slug) !!}" class="add-to-cart-product">
                                         <span><i class="fa fa-shopping-cart"></i> Compare</span>
                                     </a>
-									<a href="single-product.php">
+									<a href="{!! url('/hostel', $hostel->slug) !!}">
 										<span class="product-thumb-info-image">
 											<span class="product-thumb-info-act">
 												<span class="product-thumb-info-act-left"><em>View</em></span>
@@ -120,7 +120,7 @@
 										</span>
                                     </a>
 									<span class="product-thumb-info-content">
-										<a href="single-product.php">
+										<a href="{!! url('/hostel', $hostel->slug) !!}">
                                             <h4>{!! $hostel->name !!}</h4>
                                             <p>Location: {!! $hostel->address !!}</p>
 											<span class="price">
