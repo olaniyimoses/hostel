@@ -485,7 +485,7 @@ Version: 		3.7.0
 	margin: 0 15px 25px 0;
 	overflow: hidden;
 	position: relative;
-	width: 125px;
+	width: 105px;
 	height: 35px;
 	float: left;
 }
@@ -617,7 +617,7 @@ Version: 		3.7.0
 }
 
 .shop table.cart .product-name {
-	width: 60%;
+	width: 25%;
 }
 
 .shop table.cart .quantity {
@@ -639,7 +639,7 @@ Version: 		3.7.0
 }
 
 .shop .cart-totals tr.total .amount {
-	font-size: 2em;
+	font-size: 1.5em;
 	display: block;
 	padding-top: 10px;
 }

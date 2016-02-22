@@ -27,7 +27,9 @@ class AddColumnsToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->dropColumn('stripe_id');
+            $table->dropColumn('card_brand');
+            $table->dropColumn('card_last_four');
         });
     }
 }

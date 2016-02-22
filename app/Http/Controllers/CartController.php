@@ -10,7 +10,6 @@ use HMS\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
 use JulioBitencourt\Cart\Cart;
-use Session;
 
 class CartController extends Controller
 {
@@ -24,10 +23,9 @@ class CartController extends Controller
     }
 
     public function showCart() {
-
-        $items = $this->cart->all();
-        return view('cartitems', compact('items') );
-//        return $this->cart->all();
+        return view('cartitems')
+            ->with('items', $this->cart->all())
+            ->with('total', $this->cart->total());
     }
 
     public function addToCart() {
@@ -41,18 +39,19 @@ class CartController extends Controller
             ->where('rooms.occupied', '=', 0)->limit(1)->get();
 
         foreach($cart as $cat){
-            $this->data = [
+            $this->cart->insert([
                 'sku' => $cat->slug.$cat->room_type,
                 'name' => $cat->name,
                 'hostel_id' => $cat->id,
                 'description' => $cat->room_type,
+                'price' => $cat->price,
                 'quantity' => Input::get('quantity'),
-                'price' => $cat->price
-            ];
+                'subtotal' => $cat->price * Input::get('quantity'),
+            ]);
         }
-        $this->cart->insert($this->data);
-//        $items = $this->cart->all();
-//        return $items;
+
+//        return $this->cart->all();
+
         return redirect('cart/cartitems');
     }
 }

@@ -57,7 +57,7 @@
 <body>
 
 <div class="body">
-    <header id="header" class="single-menu flat-menu transparent semi-transparent valign font-color-light" data-plugin-options='{"stickyEnabled": true, "stickyBodyPadding": false}'>
+    <header id="header" class="single-menu flat-menu transparent semi-transparent light valign font-color-dark" data-plugin-options='{"stickyEnabled": true, "stickyBodyPadding": false}'>
         <div class="container">
             <div class="logo">
                 <a href="/">

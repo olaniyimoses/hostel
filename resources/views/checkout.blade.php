@@ -50,63 +50,45 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr class="cart_table_item">
-                                            <td class="product-thumbnail">
-                                                <a href="shop-product-sidebar.html">
-                                                    <img width="100" height="100" alt="" class="img-responsive" src="img/products/product-1.jpg">
-                                                </a>
-                                            </td>
-                                            <td class="product-name">
-                                                <a href="shop-product-sidebar.html">Photo Camera</a>
-                                            </td>
-                                            <td class="product-price">
-                                                <span class="amount">$299</span>
-                                            </td>
-                                            <td class="product-quantity">
-                                                1
-                                            </td>
-                                            <td class="product-subtotal">
-                                                <span class="amount">$299</span>
-                                            </td>
-                                        </tr>
-                                        <tr class="cart_table_item">
-                                            <td class="product-thumbnail">
-                                                <a href="shop-product-sidebar.html">
-                                                    <img width="100" height="100" alt="" class="img-responsive" src="img/products/product-2.jpg">
-                                                </a>
-                                            </td>
-                                            <td class="product-name">
-                                                <a href="shop-product-sidebar.html">Golf Bag</a>
-                                            </td>
-                                            <td class="product-price">
-                                                <span class="amount">$72</span>
-                                            </td>
-                                            <td class="product-quantity">
-                                                1
-                                            </td>
-                                            <td class="product-subtotal">
-                                                <span class="amount">$72</span>
-                                            </td>
-                                        </tr>
-                                        <tr class="cart_table_item">
-                                            <td class="product-thumbnail">
-                                                <a href="shop-product-sidebar.html">
-                                                    <img width="100" height="100" alt="" class="img-responsive" src="img/products/product-3.jpg">
-                                                </a>
-                                            </td>
-                                            <td class="product-name">
-                                                <a href="shop-product-sidebar.html">Workout</a>
-                                            </td>
-                                            <td class="product-price">
-                                                <span class="amount">$60</span>
-                                            </td>
-                                            <td class="product-quantity">
-                                                1
-                                            </td>
-                                            <td class="product-subtotal">
-                                                <span class="amount">$60</span>
-                                            </td>
-                                        </tr>
+                                        @if (! empty($items))
+                                            @foreach($items as $item)
+                                                <tr class="cart_table_item">
+                                                    <td class="product-thumbnail">
+                                                        <a href="shop-product-sidebar.html">
+                                                            <img width="100" height="100" alt="" class="img-responsive" src="{!! asset("assets/img/hostels/$item[hostel_id]/3.jpg") !!}">
+                                                        </a>
+                                                    </td>
+                                                    <td class="product-name">
+                                                        <a href="#">{!! $item['name']. ' ' . $item['description'] !!}</a>
+                                                    </td>
+                                                    <td class="product-price">
+                                                        <span class="amount">&#x20A6; {!! number_format($item['price'], 2, '.', ',') !!}</span>
+                                                    </td>
+                                                    <td class="product-quantity">
+                                                        {!! $item['quantity'] !!}
+                                                    </td>
+                                                    <td class="product-subtotal">
+                                                        <span class="amount">&#x20A6; {!! number_format($item['subtotal'], 2, '.', ',')!!}</span>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @else
+                                            <tr>
+                                                <td>
+                                                    &nbsp;
+                                                </td>
+                                                <td>
+                                                    &nbsp;
+                                                </td>
+                                                <td class="product-name">Nothing to Checkout</td>
+                                                <td>
+                                                    &nbsp;
+                                                </td>
+                                                <td>
+                                                    &nbsp;
+                                                </td>
+                                            </tr>
+                                        @endif
                                         </tbody>
                                     </table>
 
@@ -120,7 +102,7 @@
                                                 <strong>Order Total</strong>
                                             </th>
                                             <td>
-                                                <strong><span class="amount">$431</span></strong>
+                                                <strong><span class="amount">&#x20A6; {!! isset($total) ?  number_format($total, 2, '.', ',') : ' 0' !!}</span></strong>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -130,10 +112,28 @@
                         </div>
                     </div>
 
-                    <div class="actions-continue">
-                        <input type="submit" value="Place Order" name="proceed" class="btn btn-lg btn-primary push-top">
-                    </div>
+                    {{--<div class="actions-continue">
+                        <a href="{!! url('cart/pay') !!}" class="btn btn-lg btn-primary push-top">Place Order</a>
+                    </div>--}}
 
+                    <div class="actions-continue">
+                        <form action="{!! url('cart/pay') !!}" method="POST">
+                            {!! csrf_field() !!}
+                            @if (! empty($items))
+                                @foreach($items as $item)
+                            <script
+                                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                    data-key="pk_test_qvF0YFVNxMsURn8llOB8aQxs"
+                                    data-amount={!! $total !!}
+                                    data-name="{!! Auth::user()->email !!}"
+                                    data-description="{!! $item['name']. ' ' . $item['description'] !!}"
+                                    data-image="{!! asset("assets/img/hostels/$item[hostel_id]/3.jpg") !!}"
+                                    data-locale="auto">
+                            </script>
+                                @endforeach
+                            @endif
+                        </form>
+                    </div>
                 </div>
                 <div class="col-md-3">
                     <h4>Cart Totals</h4>
@@ -144,7 +144,7 @@
                                 <strong>Order Total</strong>
                             </th>
                             <td>
-                                <strong><span class="amount">$431</span></strong>
+                                <strong><span class="amount">&#x20A6; {!! isset($total) ?  number_format($total, 2, '.', ',') : ' 0' !!}</span></strong>
                             </td>
                         </tr>
                         </tbody>

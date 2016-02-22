@@ -51,5 +51,11 @@ Route::group(['middleware' => 'web'], function () {
     Route::group(['prefix' => 'cart'], function(){
         Route::get('cartitems', 'CartController@showCart');
         Route::post('cartitems', 'CartController@addToCart');
+
+        Route::get('checkout', 'PaymentController@showCheckout');
+        Route::post('checkout', 'PaymentController@placeOrder');
+
+        Route::get('pay', 'PaymentController@showCardForm');
+        Route::post('pay', 'PaymentController@pay');
     });
 });
